@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>hotel accommodation</title>
+</head>
+<body>
+     
+
+<div id="card">
+
+        <h1 id = "header" > HOTEL ROOM RATES </h1>
+        <div id="container_title">
+            <h2 >Room Types </h2>
+            <h2 >Capacity</h2>
+            <h2 > Rate </h2>
+            
+        </div>
+        <div id="container_p">
+            <div class="container_grid_p">
+            <p>Standard</p>
+            <p>Duplex</p>
+            <p>Deluxe</p>
+            <p>Presidential</p>
+            </div>
+
+            <div class="container_grid_p">
+                <p>1</p>
+                <p>2</p>
+                <p>2</p>
+                <p>2</p>
+            </div>
+
+            <div class="container_grid_p">
+                <p>₱1200</p>
+                <p>₱1500</p>
+                <p>₱1600</p>
+                <p>₱2000</p>
+            </div>
+            
+            
+        </div>
+        <h3 id="coolor">Extra Bed =₱500 </h3>
+        <hr>
+
+
+
+
+        
+            <h2 id="coolor">
+                Room Types: 
+                <select id="selections">
+                    <option value="0">Standard</option>
+                    <option value="1">Duplex</option>
+                    <option value="2">Deluxe</option>
+                    <option value="3">Presidential</option>
+                </select>
+             </h2>
+           
+            <h2 class="numeric-input">PAX: <input type="number" id="input_p"></h2>
+            
+            <h2 class="numeric-input">Day/s of stay: <input type="number" id="input_d"></h2>
+            
+             <h1 id="output">TOTAL: </h1>
+
+            <center>
+                <button onclick="Compute()">click me</button>
+            </center>
+            
+        
+        
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+
+
+        body {
+             background-color: #FFCDB2;
+             font-family: 'Roboto Condensed', sans-serif;
+             width: 100%;
+            
+        }
+
+        #card {
+            width: 600px;
+            height: 600px;
+            margin: 10px auto;
+            padding: 30px;
+            border: 3px solid #6D6875 ;
+
+        }
+
+        hr {
+            border: 1px solid #6D6875;
+        }
+       
+        
+
+        #header {
+         
+            color: #E5989B;
+            text-align: center;
+            border: 3px solid  #6D6875 ;
+            border-radius: 5px;
+            width: 50%;
+            padding: 5px;
+            text-shadow:  3px 4px #6D6875 ;
+            height: 50px;
+            margin: auto auto;
+      
+            
+        }
+
+       
+        #container_title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #6D6875;
+       
+            
+        }
+
+        #container_grid_p{
+            margin-left: 600px;
+        }
+
+        #container_p{
+            display: grid;
+            color: #6D6875;
+            grid-template-columns: 50px 50px 50px;
+            
+            margin-left: 30px;
+            column-gap: 210px;
+            text-align: center;
+
+        }
+
+        #output{
+            color: #6D6875;
+        }
+
+        #coolor {
+            color: #6D6875;
+        }
+
+    .numeric-input {
+        position: relative;
+        color: #6D6875;
+        border-color: #B5838D;
+    }
+
+    .numeric-input input[type="number"] {
+        padding: 5px;
+        border: 1px solid #6D6875;
+        border-radius: 4px;
+        background-color: antiquewhite;
+    }
+
+    .numeric-input input[type="number"]::-webkit-inner-spin-button,
+    .numeric-input input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .numeric-input input[type="number"]::-moz-inner-spin-button,
+    .numeric-input input[type="number"]::-moz-outer-spin-button {
+        -moz-appearance: none;
+        margin: 0;
+        
+    }
+
+    .numeric-input:before {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-weight: bold;
+        border-color: #B5838D;
+    }
+
+    #selections {
+        padding: 5px 10px;
+        font-size: 16px;
+        border: 1px solid #6D6875;
+        border-radius: 4px;
+        background-color: antiquewhite;
+        color: #6D6875;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    #selections:focus {
+        outline: none;
+        border-color: #B5838D;
+        box-shadow: 0 0 5px rgba(240, 113, 113, 0.788);
+    }
+
+
+
+
+
+
+    </style>
+
+<script>
+    
+    function Compute() {
+        let inputP = document.getElementById("input_p").value
+        let inputD = document.getElementById("input_d").value
+        let select = document.getElementById("selections")
+        let selectedValue = select.value
+        let result = document.getElementById("output")
+        let total = 0
+        let baseRate = 0 
+        let numPersons = parseInt(inputP);
+        let numRooms = Math.ceil(numPersons / 2);
+    
+        if (selectedValue === "0") {
+            total = Number(inputP)  *  Number (inputD) * 1200
+            console.log(total)
+            result.innerHTML = "TOTAL:₱" + total;
+        } 
+        else if (selectedValue === "1") {
+            baseRate = 1500
+            total = baseRate * numRooms;
+            result.innerHTML = "TOTAL: ₱" + total;
+            }else if (selectedValue === "2") {
+            baseRate = 1600
+            total = baseRate * numRooms;
+            result.innerHTML = "TOTAL: ₱" + total;
+            }else if (selectedValue === "3") {
+                baseRate = 2000
+                total = baseRate * numRooms;
+                result.innerHTML = "TOTAL: ₱" + total;
+                }
+            
+        }
+</script>
+
+
+
+</body>
+</html>
